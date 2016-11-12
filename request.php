@@ -16,25 +16,26 @@ $definition = [
 ];
 
 if (isset($_GET["all"]) && $_GET["all"]==true){
-    $xml = '<?xml version="1.0" encoding='UTF-8'?>';
-    $xml = $xml + "<entries>";
+    $xml = '<?xml version="1.0" encoding="UTF-8"?>';
+    $xml = $xml .'<entries>';
     
     foreach($definition as $key => $val){
-        $xml = $xml + '<definition name=" '.$key.' "author="author">';
-        $xml = $xml + $val;
-        $xml = $xml + '</definition>';
+        $xml = $xml.'<definition name="'.$key.'" author="author">';
+        $xml = $xml. $val;
+        $xml = $xml. '</definition>';
     }
     
-    $xml + $xml + "</entries>";
+    $xml = $xml. "</entries>";
     print $xml;
 }
-
 else{
-    print "<h3>" . strtoupper($query) . "</h3>";
-    if (isset($definition[query]))
-        print "<p>" . $definition[$query] . "</p>";
-    else
-        print "<p>doesnt exist</p>";
+        if (isset($_GET['q']))
+            $query = $_GET['q'];
+        print "<h3>" . strtoupper($query) . "</h3>";
+        if (isset($definition[$query]))
+            print "<p>" . $definition[$query] . "</p>";
+        else
+            print "<p>doesnt exist</p>";
     
 }
 

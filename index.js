@@ -23,18 +23,19 @@ $(document).ready(function(){
         }
             
     });
-    listAll.on("click", function(){
-        var output = "<ol>";
+    searchAll.on("click", function(){
+        console.log("Search2...")
         
+        var output = "<ol>";
         $.ajax("request.php?all=true",{
             method:"GET"
         }).done(function(response){
             console.log("done (listing all)");
-            alert(response);
+            //alert(response);
             
-            var myxml = $.ajax("request");
+            var myxml = $.parseXML(response);
             $(myxml).find("definition").each(function (index, item){
-                output += "<li><strong>" + $(this.attr)("name") + "</strong - " 
+                output += "<li><strong>" + $(this).attr("name") + "</strong> - " 
                 + $(this).text() + "</li>";
             });
             $(result).html(output);
