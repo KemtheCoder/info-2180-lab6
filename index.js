@@ -12,7 +12,7 @@ $(document).ready(function(){
                 method: "GET"
             }).done(function(response) {
                 console.info("done");
-                alert(response);
+                //alert(response);
                 $(result).html(response);
             }).fail(function() {
                 $(result).html("There was a problem with your request. ");
@@ -23,6 +23,27 @@ $(document).ready(function(){
         }
             
     });
+    listAll.on("click", function(){
+        var output = "<ol>";
+        
+        $.ajax("request.php?all=true",{
+            method:"GET"
+        }).done(function(response){
+            console.log("done (listing all)");
+            alert(response);
+            
+            var myxml = $.ajax("request");
+            $(myxml).find("definition").each(function (index, item){
+                output += "<li><strong>" + $(this.attr)("name") + "</strong - " 
+                + $(this).text() + "</li>";
+            });
+            $(result).html(output);
+            }).fail(function(){
+                console.log("fail");
+                $(result).html("There was a problem with your request ");
+            });
+    });
 });
+
     
     

@@ -3,7 +3,8 @@
 // accept a term (keyword)
 // respond with a value
 
-$query = $_GET['q'];
+//if(isset($_GET["q"]))
+//$query = $_GET['q'];
 $definition = [
     "definition" => "A statement of the exact meaning of a word, especially in a dictionary.",
     "bar" => "A place that sells alcholic beverages",
@@ -14,5 +15,26 @@ $definition = [
     "php" => "A server-side scripting language, and a powerful tool for making dynamic and interactive websites",
 ];
 
-print "<h3>" . strtoupper($query) . "</h3>";
-print "<p>" . $definition[$query] . "</p>";
+if (isset($_GET["all"]) && $_GET["all"]==true){
+    $xml = '<?xml version="1.0" encoding='UTF-8'?>';
+    $xml = $xml + "<entries>";
+    
+    foreach($definition as $key => $val){
+        $xml = $xml + '<definition name=" '.$key.' "author="author">';
+        $xml = $xml + $val;
+        $xml = $xml + '</definition>';
+    }
+    
+    $xml + $xml + "</entries>";
+    print $xml;
+}
+
+else{
+    print "<h3>" . strtoupper($query) . "</h3>";
+    if (isset($definition[query]))
+        print "<p>" . $definition[$query] . "</p>";
+    else
+        print "<p>doesnt exist</p>";
+    
+}
+
